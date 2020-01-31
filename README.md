@@ -1,10 +1,18 @@
-# tonbasic
+#### Basic examples of TON
 
 #### Client server example
+
+Relevant files
+
+- examples/clientserverss1.js
+- examples/clientservercs1.js
+- examples/clientserverkey1.json (created dynamically)
 
 The serverside creates a contract and deploys. The client side uses the key-pair to access the contract functions.
 
 ##### The Server side
+- examples/clientserverss1.js
+
 ```
 node clientserverss1.js 
 Future address of the contract will be:0:4e1d11eb84bbc9bd0bd44a6359cc22e720e16597fc811c98ae19c7e996e21974
@@ -15,7 +23,9 @@ Grams were transfered from giver to 0:4e1d11eb84bbc9bd0bd44a6359cc22e720e16597fc
 Serverside TON Sample deployed
 ```
 
-##### The keys created file clientserverkey1.json
+##### The keys file 
+
+- examples/clientserverkey1.json (created dynamically)
 
 ```
 {"public":"889693093ddb3d24fb81d3c37d97c7f7d87a7aafb56054ee1f1040841c28f458","secret":"de278afcf85238163f1139e163c632d39c442498ff3fcfa2ab3bc84c0de5d946"}
@@ -23,6 +33,8 @@ Serverside TON Sample deployed
 
 ```
 ##### The Client side
+- examples/clientservercs1.js
+
 ```
 node clientservercs1.js 
 Future address of the contract will be:0:4e1d11eb84bbc9bd0bd44a6359cc22e720e16597fc811c98ae19c7e996e21974
