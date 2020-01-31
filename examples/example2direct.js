@@ -2,9 +2,6 @@ const { TONClient } = require('ton-client-node-js');
 HelloContract = require('./helloContract');
 
 async function main(client) {
-}
-
-async function main1(client) {
     const helloKeys = await client.crypto.ed25519Keypair();
     const helloAddress = (await client.contracts.deploy({
         package: HelloContract.package,
@@ -23,7 +20,6 @@ async function main1(client) {
         });
         await client.setup();
         await main(client);
-        await main1(client);
         console.log('Hello TON Done');
     process.exit(0);
     } catch (error) {

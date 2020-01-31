@@ -69,37 +69,8 @@ await get_grams_from_giver(client, futureHelloAddress);
 
 
 
-async function main(client) {
 
-    helloAddress = (await client.contracts.deploy({
-    package: HelloContract.package,
-    constructorParams: {},
-    keyPair: helloKeys,
-})).address;
-console.log("Hello contract was deployed at address: "+ helloAddress);
-
-
-   const response = await client.contracts.run({
-        address: helloAddress,
-        abi: HelloContract.package.abi,
-        functionName: 'touch',
-        input: {},
-        keyPair: helloKeys,
-    });
-    console.log('Hello contract was responded to touch:', response.transaction.id);
-  
-  const localResponse = await client.contracts.runLocal({
-        address: helloAddress,
-        abi: HelloContract.package.abi,
-        functionName: 'sayHello',
-        input: {},
-        keyPair: helloKeys,
-    });
-    console.log('Hello contract was ran on a client TVM and also responded to sayHello:', localResponse);
-
-}
-
-async function runcontract(client) {
+async function runcontractusinghelper(client) {
 
   const hello = new HelloContract(client, helloAddress, helloKeys);
   await hello.deploy();
@@ -137,10 +108,9 @@ async function queries(client) {
         await client.setup();
 	     console.log("step-2 Deposit funds to contract address");
         await getaddressAndDepositfunds(client);
-	     console.log("step-3 Deploy contract and run ");
-
-        await runcontract(client);
-	     console.log("step-4 Querying Blockchain ");
+	     console.log("step-3 Deploy contract and run through helper ");
+        await runcontractusinghelper(client);
+	     console.log("step-5 Querying Blockchain ");
         await queries(client);
         console.log('Hello TON Working');
     process.exit(0);

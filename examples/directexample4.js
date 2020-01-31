@@ -50,7 +50,7 @@ async function get_grams_from_giver(client, account) {
 };
 
 
-async function myfun(client) {
+async function getaddressAndDepositfunds(client) {
 
 helloKeys = await client.crypto.ed25519Keypair();
 
@@ -69,9 +69,9 @@ await get_grams_from_giver(client, futureHelloAddress);
 
 
 
-async function main(client) {
+async function runcontractdirectly(client) {
 
-	helloAddress = (await client.contracts.deploy({
+    helloAddress = (await client.contracts.deploy({
     package: HelloContract.package,
     constructorParams: {},
     keyPair: helloKeys,
@@ -99,20 +99,9 @@ console.log("Hello contract was deployed at address: "+ helloAddress);
 
 }
 
-async function runcontract(client) {
-
-	  const hello = new HelloContract(client, helloAddress, helloKeys);
- await hello.deploy();
-	 console.log(hello.address, hello.keys);
- var response = await hello.sayHello();
- console.log(response);
-// const response = await hello.runLocal('sayHello', {});
- response = await hello.run('sayHello', {});
- console.log(response);
-
-}
 
 async function queries(client) {
+    console.log("Querying Blockchain transactions ");
     const transactions = await client.queries.transactions.query({}, 'id now status');
     console.log('All Transactions: ', transactions);
 }
@@ -124,16 +113,15 @@ async function queries(client) {
         client.config.setData({
 		servers: ['http://127.0.0.1:80']
         });
-	     console.log("one");
+        console.log("step-1");
         await client.setup();
-	     console.log("two");
-        await myfun(client);
-	     console.log("three");
-        // await main(client);
-
-        await runcontract(client);
+	     console.log("step-2 Deposit funds to contract address");
+        await getaddressAndDepositfunds(client);
+	     console.log("step-3 Deploy contract and run directly ");
+        await runcontractdirectly(client);
+	     console.log("step-4 Deploy contract and run through helper ");
         await queries(client);
-        console.log('Hello TON Done');
+        console.log('Hello TON Working');
     process.exit(0);
     } catch (error) {
         console.error(error);

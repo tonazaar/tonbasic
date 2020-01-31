@@ -100,7 +100,7 @@ async function runcontract(client) {
 
         await runcontract(client);
 
-        console.log('Serverside TON Sample deployed');
+        console.log('Server side TON Sample deployed');
     process.exit(0);
     } catch (error) {
         console.error(error);
